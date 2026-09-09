@@ -1,0 +1,78 @@
+# AI IT Helpdesk Agent
+
+knowledge_base = {
+    "wifi": [
+        "Check whether Wi-Fi is turned ON.",
+        "Restart the Wi-Fi router.",
+        "Forget the network and reconnect.",
+        "Restart the computer."
+    ],
+
+    "internet": [
+        "Check the network cable or Wi-Fi connection.",
+        "Restart the router.",
+        "Run network troubleshooter.",
+        "Check whether other devices can access the internet."
+    ],
+
+    "password": [
+        "Check whether Caps Lock is ON.",
+        "Try entering the password again.",
+        "Use the Forgot Password option.",
+        "Contact the administrator if the account is locked."
+    ],
+
+    "printer": [
+        "Check whether the printer is powered ON.",
+        "Check the USB/Wi-Fi connection.",
+        "Make sure the correct printer is selected.",
+        "Restart the printer and computer."
+    ],
+
+    "slow": [
+        "Close unnecessary applications.",
+        "Check Task Manager for high CPU usage.",
+        "Delete temporary files.",
+        "Restart the computer."
+    ]
+}
+
+
+def diagnose_problem(problem):
+    problem = problem.lower()
+
+    for keyword in knowledge_base:
+        if keyword in problem:
+            return keyword
+
+    return None
+
+
+def helpdesk_agent(problem):
+    print("\nAI IT Helpdesk Agent")
+    print("--------------------")
+    print("User Problem:", problem)
+
+    category = diagnose_problem(problem)
+
+    if category:
+        print("\nProblem Detected:", category.upper())
+        print("\nRecommended Troubleshooting Steps:")
+
+        for i, step in enumerate(knowledge_base[category], 1):
+            print(f"{i}. {step}")
+
+    else:
+        print("\nSorry! Problem not found in knowledge base.")
+        print("Please contact the IT support team.")
+
+
+# Main Program
+while True:
+    problem = input("\nEnter your technical problem: ")
+
+    if problem.lower() == "exit":
+        print("Thank you for using AI IT Helpdesk Agent!")
+        break
+
+    helpdesk_agent(problem)
